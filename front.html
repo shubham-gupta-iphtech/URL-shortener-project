@@ -240,8 +240,16 @@
             document.getElementById("result").innerHTML = "⚠️ Please enter a long URL.";
             return;
           }
-      
+          
           try {
+
+
+            if (alias)
+          {
+            document.getElementById("alias").innerHTML = ""
+          } 
+          else
+          {
             const response = await fetch("http://localhost:5000/shorten", {
               method: "POST",
               headers: {
@@ -251,7 +259,8 @@
 
             //   body: JSON.stringify({ longUrl, alias, domain }),
             });
-      
+          }
+           
             const data = await response.json();
       
             if (!response.ok) {
