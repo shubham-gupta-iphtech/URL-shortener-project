@@ -20,6 +20,28 @@ router.post('/shorten', async (req, res)=>
     res.json({message: `${shortUrl}`});
 })
 
+router.post('/shortenbyalias', async (req, res)=> 
+    {
+        const {urlReceived} = req.body;
+        const {alias} = req.body;
+        const urlCode = alias.trim();
+        const longUrl = urlReceived.trim();
+        const existingcode = await Url.findOne({ urlCode });
+        if(existingcode) return res.json({message: "this alias has been aleady used."});
+
+        const existing = await Url.findOne({ longUrl });
+        if(existing) return res.json({message: "This url is already shortened."});
+    
+        const BASE_URL = process.env.BASE_URL;
+        
+        const shortUrl = `${BASE_URL}/${urlCode}`;
+    
+        const url = new Url({longUrl, shortUrl, urlCode});
+        await url.save();
+    
+        res.json({message: `${shortUrl}`});
+    })
+
 router.get('/:code', async (req,res) => {
     
     const urlCode = req.params.code;

@@ -1,0 +1,10 @@
+const alias = document.getElementById("alias").value.trim();
+            const response = await fetch(`http://localhost:5000/shortenbyala/`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ urlReceived: longUrl }),
+
+            //   body: JSON.stringify({ longUrl, alias, domain }),
+            });

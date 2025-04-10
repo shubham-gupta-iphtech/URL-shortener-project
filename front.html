@@ -196,11 +196,12 @@
         <div class="urlbox hidden" id="cardB">
 
             <h2>Your long URL</h2>
+            <h3 id = "longurlmsg" ></h3>
             <form id="url-form-2">
     
                 <div class="custom-section">
                     <h2>TinyURL</h2>
-                   
+                    
                     <div class="button-group">
                         <a id="visitBtn" class="btn" href="#" target="_blank">Visit</a>
                         <button class="btn" onclick="shareUrl()">Share</button>
@@ -227,6 +228,7 @@
             card.classList.add('hidden');
           });
           document.getElementById(cardId).classList.remove('hidden');
+        
         }
       
         document.getElementById("url-form").addEventListener("submit", async function (e) {
@@ -234,23 +236,30 @@
       
           const longUrl = document.getElementById("longUrl").value.trim();
           const alias = document.getElementById("alias").value.trim();
-          const domain = document.getElementById("domain").value;
+          
       
           if (!longUrl) {
             document.getElementById("result").innerHTML = "⚠️ Please enter a long URL.";
             return;
           }
-          
+
           try {
+          if(alias)
+          {  
+              response = await fetch("http://localhost:5000/shortenbyalias", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ urlReceived: longUrl, alias: alias }),
 
+            //   body: JSON.stringify({ longUrl, alias, domain }),
+            });
 
-            if (alias)
-          {
-            document.getElementById("alias").innerHTML = ""
-          } 
-          else
-          {
-            const response = await fetch("http://localhost:5000/shorten", {
+          }
+           else
+           {
+                response = await fetch("http://localhost:5000/shorten", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -259,7 +268,8 @@
 
             //   body: JSON.stringify({ longUrl, alias, domain }),
             });
-          }
+          
+           }
            
             const data = await response.json();
       
@@ -280,7 +290,7 @@
       
             // Show success card
             showCard("cardB");
-      
+            document.getElementById("longurlmsg").innerText = `${longUrl}`;
           } catch (err) {
             console.error("Fetch error:", err);
             document.getElementById("result").innerHTML = `Error: ${err.message}`;
