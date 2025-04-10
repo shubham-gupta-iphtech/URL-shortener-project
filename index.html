@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.css"></script>
+    <title>URL shortener</title>
+</head>
+<body>
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>URL Shortener</title>
+
+
+
+
+</head>
+<body>
+  <h4 id = "flexer">hhhjvghv</h4>
+  <form id = "url-form" method="post" action=""> 
+       <input type = "text" id = "longUrl" />
+       <button type="submit" >Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("url-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+  
+      const longUrl = document.getElementById("longUrl").value;
+      document.getElementById("flexer").innerText="changed";
+     
+    });
+  </script>
+</body>
+</html>
+
+

@@ -17,7 +17,7 @@ router.post('/shorten', async (req, res)=>
     const url = new Url({longUrl, shortUrl, urlCode});
     await url.save();
 
-    res.json({message: `shortened url ${shortUrl}`});
+    res.json({message: `${shortUrl}`});
 })
 
 router.get('/:code', async (req,res) => {

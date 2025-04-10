@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0664a7;
+            height: 100vh;
+
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: left;
+            /* align-items: center; */
+            /* flex-direction: column; */
+        }
+
+        .urlbox {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .urlbox h2 {
+
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .selectbox {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        /* .base-width
+    {
+        width: 70%;
+    }
+
+    .alias-width
+    {
+        width: 30%;
+    }  */
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            background: #17851b;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background: #168d32;
+        }
+
+        .custom-section {
+
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .logo {
+            width: 150px;
+
+            margin: 25px;
+        }
+
+        .side-items {
+            color: white
+        }
+
+        .hidden
+        {
+            display: none;
+        }
+
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 15px;  
+}
+
+.btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  
+}
+
+.btn:hover {
+  background-color: #3730a3;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <img class="logo" src="logo.png">
+
+    <div class="main-container">
+        <div class="urlbox" id="cardA">
+
+            <h2>Shorten a long URL</h2>
+            <form id="url-form">
+                <div class="input-group">
+
+                    <input type="text" id="longUrl" placeholder="Enter long link here">
+                </div>
+
+                <div class="custom-section">
+                    <h2>Customize Your Link</h2>
+                    <div class="input-group">
+
+                        <!-- <input type="text" id="base-url" placeholder="tinyurl.com"> -->
+                        <select id="domain" class="selectbox">
+                            <option value="https://url-shortener-project-9bif.onrender.com">
+                                https://url-shortener-project-9bif.onrender.com</option>
+                        </select>
+
+                        <script>
+                            const select = document.getElementById("colors");
+                            const result = document.getElementById("result");
+
+                            select.addEventListener("change", () => {
+                                result.textContent = `You selected: ${select.value}`;
+                            });
+                        </script>
+
+                    </div>
+                    <div class="input-group">
+
+                        <input type="text" id="alias" placeholder="Enter alias">
+                    </div>
+                </div>
+
+                <button class="button" type="submit" >Shorten URL</button>
+            </form>
+        </div>
+
+
+        <div class="urlbox hidden" id="cardB">
+
+            <h2>Your long URL</h2>
+            <form id="url-form-2">
+    
+                <div class="custom-section">
+                    <h2>TinyURL</h2>
+                   
+                    <div class="button-group">
+                        <a id="visitBtn" class="btn" href="#" target="_blank">Visit</a>
+                        <button class="btn" onclick="shareUrl()">Share</button>
+                        <button class="btn" onclick="copyUrl()">Copy</button>
+                    </div>
+                      
+                </div>
+                <button class="button">My URLs</button>
+                <button class="button"  onclick="showCard('cardA')">Shorten another</button>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="side-items" id = "result">The original URL shortener </h2>
+            <h4 class="side-items">Just enter the URL you want to shorten. Enter the alias name and your URL will be
+                shortened.</h4>
+        </div>
+    </div>
+
+
+    <script>
+        function showCard(cardId) {
+          document.querySelectorAll('.urlbox').forEach(card => {
+            card.classList.add('hidden');
+          });
+          document.getElementById(cardId).classList.remove('hidden');
+        }
+      
+        document.getElementById("url-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+      
+          const longUrl = document.getElementById("longUrl").value.trim();
+          const alias = document.getElementById("alias").value.trim();
+          const domain = document.getElementById("domain").value;
+      
+          if (!longUrl) {
+            document.getElementById("result").innerHTML = "⚠️ Please enter a long URL.";
+            return;
+          }
+      
+          try {
+            const response = await fetch("http://localhost:5000/shorten", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ urlReceived: longUrl }),
+
+            //   body: JSON.stringify({ longUrl, alias, domain }),
+            });
+      
+            const data = await response.json();
+      
+            if (!response.ok) {
+              document.getElementById("result").innerHTML = `Error: ${data.message || 'Something went wrong.'}`;
+              return;
+            }
+      
+            const shortUrl = data.shortUrl || data.message; // in case backend sends it under "message"
+      
+            // Show the result
+            document.getElementById("result").innerHTML = `
+              Your Short URL: <a href="${shortUrl}" target="_blank">${shortUrl}</a>
+            `;
+      
+            // Update visit button
+            document.getElementById("visitBtn").href = shortUrl;
+      
+            // Show success card
+            showCard("cardB");
+      
+          } catch (err) {
+            console.error("Fetch error:", err);
+            document.getElementById("result").innerHTML = `Error: ${err.message}`;
+          }
+        });
+      
+        function shareUrl() {
+          const url = document.getElementById("visitBtn").href;
+          if (navigator.share) {
+            navigator.share({ url }).catch(err => console.error(err));
+          } else {
+            alert("Sharing not supported in your browser.");
+          }
+        }
+      
+        function copyUrl() {
+          const url = document.getElementById("visitBtn").href;
+          navigator.clipboard.writeText(url).then(() => {
+            alert("URL copied to clipboard!");
+          }).catch(err => {
+            alert("Failed to copy: " + err);
+          });
+        }
+      </script>
+      
+      
+</body>
+</html>
