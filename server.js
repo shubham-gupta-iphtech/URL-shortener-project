@@ -17,7 +17,10 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/',urlRoutes);
 
 const PORT = 5000 || process.env.PORT;
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+   res.sendFile(path.join(__dirname, 'public', 'front.html'));
+ });
 app.listen(PORT, ()=> 
 {
    console.log("app is listening on port 5000");
