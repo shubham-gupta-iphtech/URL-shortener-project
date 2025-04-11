@@ -1,9 +1,9 @@
-import express from "express";
-import urlRoutes from "./router/urlRoutes.js"; 
-import mongoose from "mongoose";
-import 'dotenv/config'
-import cors from 'cors';
-import path from 'path';
+const express = require('express');
+const urlRoutes = require('./router/urlRoutes'); 
+const mongoose = require('mongoose');
+require('dotenv').config();
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
