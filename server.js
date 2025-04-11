@@ -3,7 +3,7 @@ import urlRoutes from "./router/urlRoutes.js";
 import mongoose from "mongoose";
 import 'dotenv/config'
 import cors from 'cors';
-
+import path from 'path';
 
 const app = express();
 app.use(express.json());
