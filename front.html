@@ -246,7 +246,7 @@
           try {
           if(alias)
           {  
-              response = await fetch("http://localhost:5000/shortenbyalias", {
+              response = await fetch("http://url-shortener-project-9bif.onrender.com/shortenbyalias", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -259,7 +259,7 @@
           }
            else
            {
-                response = await fetch("http://localhost:5000/shorten", {
+                response = await fetch("http://url-shortener-project-9bif.onrender.com/shorten", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

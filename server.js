@@ -16,7 +16,9 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.use('/',urlRoutes);
 
-app.listen(5000, ()=> 
+const PORT = 5000 || process.env.PORT;
+
+app.listen(PORT, ()=> 
 {
    console.log("app is listening on port 5000");
 })
