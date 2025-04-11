@@ -1,9 +1,10 @@
-const express = require('express');
-const urlRoutes = require('./router/urlRoutes'); 
-const mongoose = require('mongoose');
-require('dotenv').config();
-const cors = require('cors');
-const path = require('path');
+import express from "express";
+import urlRoutes from "./router/urlRoutes.js"; 
+import mongoose from "mongoose";
+import 'dotenv/config'
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/',urlRoutes);
 
 const PORT = 5000 || process.env.PORT;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'public', 'front.html'));
