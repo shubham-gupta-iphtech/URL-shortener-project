@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
 .catch(err => console.error(err));
 
 
-app.use('/',urlRoutes);
+app.use('/api',urlRoutes);
 
 const PORT = 5000 || process.env.PORT;
 const __filename = fileURLToPath(import.meta.url);
