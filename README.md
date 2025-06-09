@@ -32,7 +32,25 @@ A simple, user-friendly URL shortener web app inspired by TinyURL. Built using *
 - Utilities : dotenv, nanoid, validator
 
 
-```text url-shortener/ ├── config/ # MongoDB connection setup │ └── db.js ├── controller/ # URL shortening logic (optional abstraction) │ └── urlController.js ├── model/ # Mongoose schema │ └── url.js ├── public/ # Static frontend files (HTML, CSS, JS) │ ├── index.html │ ├── style.css │ └── script.js ├── router/ # Express route handlers │ └── urlRoute.js ├── .env # Environment variables ├── package.json # Project metadata and dependencies ├── package-lock.json ├── sample.txt # Sample input or test file (if needed) └── server.js # App entry point ```
+url-shortener/
+├── config/             # MongoDB connection setup
+│   └── db.js
+├── controller/         # URL shortening logic (optional abstraction)
+│   └── urlController.js
+├── model/              # Mongoose schema
+│   └── url.js
+├── public/             # Static frontend files (HTML, CSS, JS)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── router/             # Express route handlers
+│   └── urlRoute.js
+├── .env                # Environment variables
+├── package.json        # Project metadata and dependencies
+├── package-lock.json
+├── sample.txt          # Sample input or test file (if needed)
+└── server.js           # App entry point
+
 
 
 ## ⚙️ Setup Instructions
